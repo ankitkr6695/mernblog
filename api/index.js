@@ -16,10 +16,10 @@ require('dotenv').config()
 
 // app.use(cors({ credentials: true, origin: `${process.env.APP_URL}` }));
 app.use(cors({
-  origin: process.env.APP_URL || "*",
+  origin: process.env.APP_URL, // Ensure this is correctly set
   credentials: true,
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  allowedHeaders: "Content-Type,Authorization"
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 app.use(express.json());
 app.use(cookieParser());
