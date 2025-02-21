@@ -14,14 +14,14 @@ const uploadMiddleware = multer({ dest: 'uploads/' })
 const fs = require('fs');
 require('dotenv').config()
 
-app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
+app.use(cors({ credentials: true, origin: `${process.env.APP_URL}` }));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 mongoose.connect(process.env.MONGODB_URL)
 
 const salt = bcrypt.genSaltSync(10);
-const secret = 'abfaufjfnurwk4';
+const secret = process.env.JWT_SECRET;
 app.post('/register', async (req, res) => {
     const { Username, Password } = req.body;
     try {
