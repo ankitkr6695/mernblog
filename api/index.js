@@ -14,7 +14,13 @@ const uploadMiddleware = multer({ dest: 'uploads/' })
 const fs = require('fs');
 require('dotenv').config()
 
-app.use(cors({ credentials: true, origin: `${process.env.APP_URL}` }));
+// app.use(cors({ credentials: true, origin: `${process.env.APP_URL}` }));
+app.use(cors({
+  origin: process.env.APP_URL || "*",
+  credentials: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: "Content-Type,Authorization"
+}));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
